@@ -59,6 +59,10 @@ allprojects {
         gradlePluginPortal()
         repositories {
             maven {
+                name = "Gradle libs"
+                url = uri("https://repo.gradle.org/gradle/libs")
+            }
+            maven {
                 name = "kotlinx"
                 url = uri("https://kotlin.bintray.com/kotlinx/")
             }

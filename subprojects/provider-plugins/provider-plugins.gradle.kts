@@ -9,7 +9,9 @@ base {
 }
 
 dependencies {
-    compileOnly(gradleApiWithParameterNames())
+    compileOnly("org.gradle:gradle-plugins") {
+        exclude(module = "sisu-inject-plexus")
+    }
 
     compile(project(":provider"))
 }

@@ -28,3 +28,11 @@ for (project in rootProject.children) {
         require(buildFile.isFile) { "Project '${project.path} must have a $buildFile build script" }
     }
 }
+
+includeBuild("../gradle") {
+    dependencySubstitution {
+        substitute(module("org.gradle:gradle-core-api")).with(project(":coreApi"))
+        substitute(module("org.gradle:gradle-tooling-api")).with(project(":toolingApi"))
+        substitute(module("org.gradle:gradle-plugins")).with(project(":plugins"))
+    }
+}

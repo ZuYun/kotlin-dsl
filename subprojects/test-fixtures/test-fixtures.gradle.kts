@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    compile(gradleApiWithParameterNames())
+    compileOnly("org.gradle:gradle-core-api")
 
     compile(project(":provider"))
     compile(project(":tooling-builders"))
