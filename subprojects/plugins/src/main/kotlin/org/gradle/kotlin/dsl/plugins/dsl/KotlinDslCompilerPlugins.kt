@@ -26,6 +26,9 @@ import org.gradle.api.internal.TaskInternal
 
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+import org.jetbrains.kotlin.allopen.gradle.AllOpenExtension
+import org.jetbrains.kotlin.allopen.gradle.AllOpenGradleSubplugin
+
 import org.jetbrains.kotlin.samWithReceiver.gradle.SamWithReceiverExtension
 import org.jetbrains.kotlin.samWithReceiver.gradle.SamWithReceiverGradleSubplugin
 
@@ -45,6 +48,11 @@ class KotlinDslCompilerPlugins : Plugin<Project> {
         plugins.apply(SamWithReceiverGradleSubplugin::class.java)
         extensions.configure(SamWithReceiverExtension::class.java) { samWithReceiver ->
             samWithReceiver.annotation(HasImplicitReceiver::class.qualifiedName!!)
+        }
+
+        plugins.apply(AllOpenGradleSubplugin::class.java)
+        extensions.configure(AllOpenExtension::class.java) { allOpen ->
+            // TODO add annotation
         }
 
         afterEvaluate {

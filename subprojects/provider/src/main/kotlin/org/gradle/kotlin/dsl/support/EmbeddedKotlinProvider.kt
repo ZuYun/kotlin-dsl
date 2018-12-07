@@ -151,13 +151,15 @@ val embeddedModules: List<EmbeddedModule> by lazy {
     val compilerEmbeddable = embeddedKotlin("compiler-embeddable")
     val scriptRuntime = embeddedKotlin("script-runtime")
     val samWithReceiverCompilerPlugin = embeddedKotlin("sam-with-receiver-compiler-plugin")
+    val allOpenCompilerPlugin = embeddedKotlin("maven-allopen")
     listOf(
         annotations,
         stdlib, stdlibJdk7, stdlibJdk8,
         reflect,
         compilerEmbeddable,
         scriptRuntime,
-        samWithReceiverCompilerPlugin)
+        samWithReceiverCompilerPlugin,
+        allOpenCompilerPlugin)
 }
 
 

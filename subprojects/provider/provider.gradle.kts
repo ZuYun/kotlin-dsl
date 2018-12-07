@@ -21,6 +21,9 @@ dependencies {
     compile(futureKotlin("sam-with-receiver-compiler-plugin")) {
         isTransitive = false
     }
+    compile(futureKotlin("maven-allopen")) {
+        isTransitive = false
+    }
     compile("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.0.4") {
         isTransitive = false
     }

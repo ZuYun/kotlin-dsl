@@ -15,6 +15,7 @@ dependencies {
     implementation(futureKotlin("stdlib-jdk8"))
     implementation(futureKotlin("gradle-plugin"))
     implementation(futureKotlin("sam-with-receiver"))
+    implementation(futureKotlin("allopen"))
 
     testImplementation(project(":test-fixtures"))
 }

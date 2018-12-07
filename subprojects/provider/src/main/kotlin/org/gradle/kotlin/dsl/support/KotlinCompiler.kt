@@ -51,10 +51,12 @@ import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.config.LanguageVersion
 import org.jetbrains.kotlin.config.LanguageVersionSettingsImpl
 
-import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor.Companion.registerExtension
+import org.jetbrains.kotlin.extensions.DeclarationAttributeAltererExtension
+import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
 
 import org.jetbrains.kotlin.name.NameUtils
 
+import org.jetbrains.kotlin.allopen.CliAllOpenDeclarationAttributeAltererExtension
 import org.jetbrains.kotlin.samWithReceiver.CliSamWithReceiverComponentContributor
 
 import org.jetbrains.kotlin.script.KotlinScriptDefinition
@@ -91,6 +93,7 @@ fun compileKotlinScriptToDirectory(
             }
             val environment = kotlinCoreEnvironmentFor(configuration).apply {
                 HasImplicitReceiverCompilerPlugin.apply(project)
+                AllOpenCompilerPlugin.apply(project)
             }
 
             compileBunchOfSources(environment)
@@ -105,11 +108,24 @@ private
 object HasImplicitReceiverCompilerPlugin {
 
     fun apply(project: Project) {
-        registerExtension(project, samWithReceiverComponentContributor)
+        StorageComponentContainerContributor.registerExtension(project, samWithReceiverComponentContributor)
     }
 
     val samWithReceiverComponentContributor = CliSamWithReceiverComponentContributor(
         listOf("org.gradle.api.HasImplicitReceiver")
+    )
+}
+
+
+private
+object AllOpenCompilerPlugin {
+
+    fun apply(project: Project) {
+        DeclarationAttributeAltererExtension.registerExtension(project, allOpenComponentContributor)
+    }
+
+    val allOpenComponentContributor = CliAllOpenDeclarationAttributeAltererExtension(
+        listOf() // TODO add annotation
     )
 }
 
