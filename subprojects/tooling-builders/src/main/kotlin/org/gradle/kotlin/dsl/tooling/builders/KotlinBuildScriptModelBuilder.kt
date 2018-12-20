@@ -36,7 +36,7 @@ import org.gradle.internal.classpath.DefaultClassPath
 import org.gradle.internal.resource.BasicTextResourceLoader
 
 import org.gradle.kotlin.dsl.accessors.AccessorsClassPath
-import org.gradle.kotlin.dsl.accessors.pluginAccessorsClassPath
+import org.gradle.kotlin.dsl.accessors.pluginSpecBuildersClassPath
 import org.gradle.kotlin.dsl.accessors.projectAccessorsClassPath
 
 import org.gradle.kotlin.dsl.execution.EvalOption
@@ -190,7 +190,7 @@ fun projectScriptModelBuilder(
     project = project,
     scriptClassPath = project.scriptCompilationClassPath,
     accessorsClassPath = { classPath ->
-        projectAccessorsClassPath(project, classPath) + pluginAccessorsClassPath(project)
+        projectAccessorsClassPath(project, classPath) + pluginSpecBuildersClassPath(project)
     },
     sourceLookupScriptHandlers = sourceLookupScriptHandlersFor(project),
     enclosingScriptProjectDir = project.projectDir
