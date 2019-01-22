@@ -287,16 +287,17 @@ fun compilationClassPathForScriptPluginOf(
     val scriptScope = baseScope.createChild("model-${scriptFile.toURI()}")
     val scriptHandler = scriptHandlerFactory.create(scriptSource, scriptScope)
 
-    kotlinScriptFactoryOf(project).evaluate(
-        target = target,
-        scriptSource = scriptSource,
-        scriptHandler = scriptHandler,
-        targetScope = scriptScope,
-        baseScope = baseScope,
-        topLevelScript = false,
-        options = EnumSet.of(EvalOption.IgnoreErrors, EvalOption.SkipBody)
-    )
-
+    project.serviceOf<ClassPathModeExceptionCollector>().ignoringErrors {
+        kotlinScriptFactoryOf(project).evaluate(
+            target = target,
+            scriptSource = scriptSource,
+            scriptHandler = scriptHandler,
+            targetScope = scriptScope,
+            baseScope = baseScope,
+            topLevelScript = false,
+            options = EnumSet.of(EvalOption.IgnoreErrors, EvalOption.SkipBody)
+        )
+    }
     return scriptHandler to project.compilationClassPathOf(scriptScope)
 }
 
